@@ -465,14 +465,17 @@ void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color) {
 	
 	COLORREF Color = color;
 		
-	for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
-	{
-		for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-		{
-			Effect.Color[row][col] = Color;
-		}
-	}
+	//for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+	//{
+	//	for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
+	//	{
+	//		Effect.Color[row][col] = Color;
+	//	}
+	//}
 		
+
+	Effect.Color[HIBYTE(Keyboard::RZKEY_3)][LOBYTE(Keyboard::RZKEY_3)] = Color;
+
 	Sleep(1000);
 	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
 
