@@ -11,78 +11,155 @@ tokens = chromeItLexer.tokens
 #           ChromeIT Grammar Rules            #
 #---------------------------------------------#
 
+
 def p_start(p):
   'start : effect playSequence'
+  p[0] = p[1] + p[2]
+
+  createEffects(p[1])
+  playEffects(p[2])
     
   
 def p_effect(p):
   '''effect : ID effectDevice 
             | ID effectDevice effect'''
+
+  if(len(p) == 2):
+    p[0] = [[p[1]].extend(p[2])]
+  else:
+    [[p[1]].extend(p[2])].extend(p[3])
+
+
+
   
 def p_effectDevice(p):
   '''effectDevice : mouseEffect 
                   | keyboardEffect'''
-  
+  p[0] = p[1]
+
 def p_mouseEffect(p):
   'mouseEffect : MOUSE mouseEffectType '
-  
+  p[0] = [1].extend(p[2])
+
 def p_keyboardEffect(p):
   'keyboardEffect : KEYBOARD keyboardEffectType '
+  p[0] = [2].extend(p[2])
   
 def p_mouseEffectType(p):
-  '''mouseEffectType : STATIC staticArgument 
-                     | BLINK blinkArguments 
-                     | SPECTRUM + spectrumArguments 
-                     | CUSTOM + customMouseArguments'''  
+  #1 Static Arguments order: [color]
+  #2 Blink Arguments order: [TIME, TIME, [COLORS]]
+  #3 Spectrum Arguments order: [TIME]
+  #4 Custom Arguments order: [[zone, color],[zone, color]...]
+
+
+  '''mouseEffectType : STATIC staticArguments
+                     | BLINK blinkArguments
+                     | SPECTRUM + spectrumArguments
+                     | CUSTOM + customMouseArguments'''
+  if (p[2] == "static"):
+    p[0] = [1].extend[p[2]]
+  elif (p[2] == "blink"):
+    p[0] = [2].extend[p[2]]
+  elif (p[2] == "spectrum"):
+    p[0] = [3].extend[p[2]]
+  elif (p[2] == "custom"):
+    p[0] = [4].extend[p[2]]
+
 
 def p_keyboardEffectType(p):
-  '''keyboardEffectType : STATIC staticArgument 
-                        | BLINK blinkArguments 
-                        | SPECTRUM spectrumArguments 
-                        | CUSTOM customMouseArguments 
-                        | WAVE waveArguments 
-                        | BREATHE breatheArguments 
-                        | REACT reactArguments 
-                        | CUSTOM customKeyboardArguments 
-                        | STARLIGHT starlightArguments'''    
+  #1 Static Arguments order: [color]
+  #2 Blink Arguments order: [TIME, TIME, [COLORS]]
+  #3 Spectrum Arguments order: [TIME]
+  #4 Custom Arguments order: [[key, color],[key, color]...]
+  #5 Wave Arguments order: [direction]
+  #6 Breathe Arguments order: [breatheType, [Colors]]
+  #7 React Arguments order: [reactType, color]
+  #8 Starlight Arguments order: [NUMBER]
+
+
+  '''keyboardEffectType : STATIC staticArguments
+                        | BLINK blinkArguments
+                        | SPECTRUM spectrumArguments
+                        | CUSTOM customMouseArguments
+                        | WAVE waveArguments
+                        | BREATHE breatheArguments
+                        | REACT reactArguments
+                        | STARLIGHT starlightArguments'''
+
+  if(p[2] == "static"):
+    p[0] = [1].extend[p[2]]
+  elif(p[2] == "blink"):
+    p[0] = [2].extend[p[2]]
+  elif (p[2] == "spectrum"):
+    p[0] = [3].extend[p[2]]
+  elif (p[2] == "custom"):
+    p[0] = [4].extend[p[2]]
+  elif (p[2] == "wave"):
+    p[0] = [5].extend[p[2]]
+  elif (p[2] == "breathe"):
+    p[0] = [6].extend[p[2]]
+  elif (p[2] == "react"):
+    p[0] = [7].extend[p[2]]
+  elif(p[2] == "starlight"):
+    p[0] = [8].extend[p[2]]
+
+
 
 def p_staticArguments(p):
   'staticArgument : color'
+  p[0] = [p[1]]
+
   
 def p_blinkArguments(p):
   'blinkArguments : TIME TIME colors'
+  p[0] = [p[1], p[2] , p[3]]
   
 def p_spectrumArguments(p):
   'spectrumArguments : TIME'
+  p[0] = [p[1]]
   
 def p_waveArguments(p):
   'keyboardEffect : direction'
+  p[0] = [p[1]]
   
 def p_direction(p):
   '''direction : L2R 
               | R2L'''
+  p[0] = p[1]
 
 def p_breatheArguments(p):
-  'breatheArguments : breatheType colors'  
+  'breatheArguments : breatheType colors'
+  p[0] = [p[1], p[2]]
   
 def p_reactArguments(p):
-  'reactArguments : color reactType'  
+  'reactArguments : reactType color'
+  p[0] = [p[1], p[2]]
   
 def p_starlightArguments(p):
-  'starlightArguments : NUMBER'''  
+  'starlightArguments : NUMBER'
+  p[0] = [p[1]]
   
 def p_customMouseArguments(p):
   '''customMouseArguments : zone color 
-                          | zone color customMouseArguments'''  
+                          | zone color customMouseArguments'''
+  if(len(p) == 2):
+    p[0] = [[p[1], p[2]]]
+  else:
+    p[0] = [[p[1], p[2]]].extend(p[3])
   
 def p_customKeyboardArguments(p):
   '''customKeyboardArguments : key color 
                              | key color customKeyboardArguments'''
+  if (len(p) == 2):
+    p[0] = [[p[1], p[2]]]
+  else:
+    p[0] = [[p[1], p[2]]].extend(p[3])
 
 def p_zone(p):
   '''zone: TOP 
          | MIDDLE 
          | BOTTOM'''
+  p[0] = p[1]
   
 def p_key(p):
   '''key: RZKEY_ESC 
@@ -207,14 +284,24 @@ def p_key(p):
         | RZKEY_KOR_5 
         | RZKEY_KOR_6
         | RZKEY_KOR_7'''
+  p[0] = p[1]
   
 def p_playSequence(p):
   '''playSequence: ID NUMBER
                  | ID NUMBER playSequence'''
 
+  if(len(p) == 2):
+    p[0] = [[p[1], p[2]]]
+  else:
+    p[0] = [[p[1], p[2]]].extend(p[3])
+
 def p_colors(p):
   '''colors: color 
            | color colors'''
+  if(len(p) == 1):
+    p[0] = [p[1]]
+  else:
+    p[0] = [p[1]].extend(p[2])
   
 def p_color(p):
   '''color: BLACK 
@@ -229,24 +316,29 @@ def p_color(p):
           | PINK 
           | GREY 
           | RANDOM 
-          | rgbColor''' 
+          | rgbColor'''
+  p[0] = p[1]
 
 def p_rgbColor(p):
-  'rgbColor: RGB LP RGBNUM COMA RGBNUM COMA RGBNUM RP'   
+  'rgbColor: RGB LP RGBNUM COMA RGBNUM COMA RGBNUM RP'
+  p[0] = p[1] + p[2] + p[3] + p[4] + p[5]+ p[6]+ p[7] + p[8]
 
 def p_reactType(p):
   '''reactType: SHORT 
               | MEDIUM
               | LONG'''
+  p[0] = p[1]
   
 def p_breatheType(p):
   '''breatheType: SLOW 
                 | MEDIUM 
-                | FAST''' 
+                | FAST'''
+  p[0] = p[1]
   
 def p_direction(p):
   '''direction: L2R 
               | R2L'''
+  p[0] = p[1]
   
 
   
@@ -259,5 +351,105 @@ def p_error(p):
 #           Python Intermediate Code          #
 #---------------------------------------------#
 
+def createEffects(effectsList):
+  for effect in effectsList:
+    if(effect[1] == 1):
+      createMouseEffect(effect)
+    elif (effect[1] == 2):
+      createKeyboardEffect(effect)
 
-ids = []
+def createMouseEffect(effect):
+  if(effect[2] == 1):
+    createStaticMouseEffect(effect[0], effect[3])
+  elif(effect[2] == 2):
+    createBlinkMouseEffect(effect[0], effect[3], effect[4], effect[5])
+  elif (effect[2] == 3):
+    createSpectrumMouseEffect(effect[0], effect[3])
+  elif (effect[2] == 4):
+    createCustomMouseEffect(effect[0], effect[3])
+
+def createKeyboardEffect(effect):
+  if (effect[2] == 1):
+    createStaticKeyboardEffect(effect[0], effect[3])
+  elif (effect[2] == 2):
+    createBlinkKeyboardEffect(effect[0], effect[3], effect[4], effect[5])
+  elif (effect[2] == 3):
+    createSpectrumKeyboardEffect(effect[0], effect[3])
+  elif (effect[2] == 4):
+    createCustomKeyboardEffect(effect[0], effect[3])
+  elif (effect[2] == 5):
+    createWaveKeyboardEffect(effect[0], effect[3])
+  elif (effect[2] == 6):
+    createBreatheKeyboardEffect(effect[0], effect[3], effect[4])
+  elif (effect[2] == 7):
+    createReactKeyboardEffect(effect[0], effect[3], effect[4])
+  elif (effect[2] == 8):
+    createStarlightKeyboardEffect(effect[0], effect[3])
+
+
+def playEffects(effects):
+  for effect in effects:
+    playEffect(effect[0], effect[1])
+
+
+
+def createStaticMouseEffect(name, color):
+  pass
+
+def createBlinkMouseEffect(name, timeOn, timeOf, color):
+  pass
+
+def createSpectrumMouseEffect(name, time):
+  pass
+
+def createCustomMouseEffect(name, keyAndColor):
+  pass
+
+
+
+def createStaticKeyboardEffect(name, color):
+  pass
+
+def createBlinkKeyboardEffect(name, timeOn, timeOf, color):
+  pass
+
+def createSpectrumKeyboardEffect(name, time):
+  pass
+
+def createCustomKeyboardEffect(name, keyAndColor):
+  pass
+
+def createWaveKeyboardEffect(name, direction):
+  pass
+
+def createBreatheKeyboardEffect(name, type, colors):
+  pass
+
+def createReactKeyboardEffect(name, type, color):
+  pass
+
+def createStarlightKeyboardEffect(name, lightCount):
+  pass
+
+def playEffect(effectName, times):
+  pass
+
+
+
+
+
+
+
+#---------------------------------------------#
+#             Parser Testing Code             #
+#---------------------------------------------#
+try:
+  ChromeItSource = open("../Testing/Test1.txt", 'r')
+except IOError:
+  print("Error")
+  exit()
+
+fileText = ChromeItSource.read()
+
+parser = yacc.yacc()
+res = parser.parse(fileText)
