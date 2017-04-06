@@ -36,9 +36,10 @@ public:
 	BOOL Initialize();
 	BOOL UnInitialize();
 
-	void ShowMouseStaticEffect(COLORREF color, int type, int zones);
+	void ShowMouseStaticEffect(COLORREF color);
 	void ShowMouseBlinkEffect(int on, int off, COLORREF color);
 	void ShowMouseSpectrumEffect(int time);
+	void ShowMouseCustomEffect(COLORREF color, int zones);
 
 	void ShowKeyboardWaveEffect(int direction);
 	void ShowKeyboardSpectrumEffect(int time);
@@ -46,7 +47,8 @@ public:
 	void ShowKeyboardBlinkEffect(int on, int off, COLORREF color);
 	void ShowKeyboardReactEffect(COLORREF color, int duration);
 	void ShowKeyboardStarlightEffect(int atATime);
-	void ShowKeyboardStaticEffect(COLORREF color, int type, int keys);
+	void ShowKeyboardStaticEffect(COLORREF color);
+	void ShowKeyboardCustomEffect(COLORREF color, int keys);
 	
 	BOOL IsDeviceConnected(RZDEVICEID DeviceId);
 
