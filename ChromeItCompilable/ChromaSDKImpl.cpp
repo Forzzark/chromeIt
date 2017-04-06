@@ -128,13 +128,13 @@ BOOL CChromaSDKImpl::UnInitialize()
 
 
 //Mouse Effects
-void CChromaSDKImpl::ShowMouseStaticEffect(COLORREF color, int type, int zones) {
+void CChromaSDKImpl::ShowMouseStaticEffect(COLORREF color) {
 	RZEFFECTID Play = GUID_NULL;
 
 
 
 	ChromaSDK::Mouse::CUSTOM_EFFECT_TYPE2 Effect = {};
-	if(type ==0){
+	
 	    for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
 	    {
 		    for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
@@ -142,9 +142,29 @@ void CChromaSDKImpl::ShowMouseStaticEffect(COLORREF color, int type, int zones) 
 		    	Effect.Color[row][col] = color;
 		    }
 	    }
+	
+
+	CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
+	
+	while (true) {	
+		SetEffect(Play);	
 	}
-	else if(type == 1)
-        Effect.Color[HIBYTE(Mouse::RZLED2_SCROLLWHEEL)][LOBYTE(Mouse::RZLED2_SCROLLWHEEL)] = color;
+}
+void CChromaSDKImpl::ShowMouseCustomEffect(COLORREF color, int zones) {
+	RZEFFECTID Play = GUID_NULL;
+
+
+
+	ChromaSDK::Mouse::CUSTOM_EFFECT_TYPE2 Effect = {};
+	
+	    for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+	    {
+		    for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
+		    {
+			Effect.Color[HIBYTE(Mouse::RZLED2_SCROLLWHEEL)][LOBYTE(Mouse::RZLED2_SCROLLWHEEL)] = color;
+		    }
+	    }
+	
 
 	CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
 	
@@ -291,6 +311,7 @@ void CChromaSDKImpl::ShowKeyboardWaveEffect(int direction) {
 	} while (true);
 
 }
+
 void CChromaSDKImpl::ShowKeyboardSpectrumEffect(int time) {
 	RZEFFECTID Play = GUID_NULL;
 
@@ -463,7 +484,7 @@ void CChromaSDKImpl::ShowKeyboardReactEffect(COLORREF color, int duration) {
 
 	}
 }
-void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color, int type, int keys) {
+void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color) {
 	Keyboard::CUSTOM_KEY_EFFECT_TYPE Effect = {};
 
 	
@@ -472,7 +493,7 @@ void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color, int type, int keys
 
 	
 
-	if (type == 0) {
+	
 		for (UINT row = 0; row < ChromaSDK::Keyboard::MAX_ROW; row++)
 		{
 			for (UINT col = 0; col < ChromaSDK::Keyboard::MAX_COLUMN; col++)
@@ -480,10 +501,37 @@ void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color, int type, int keys
 				Effect.Color[row][col] = Color;
 			}
 		}
-	}
+
 		
-	else if(type == 1)
-		Effect.Color[HIBYTE(Keyboard::RZKEY_3)][LOBYTE(Keyboard::RZKEY_3)] = Color;
+	
+
+	Sleep(1000);
+	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+
+	while(true){
+	
+	}
+}
+void CChromaSDKImpl::ShowKeyboardCustomEffect(COLORREF color, int keys) {
+	Keyboard::CUSTOM_KEY_EFFECT_TYPE Effect = {};
+
+	
+	COLORREF Color = color;
+		
+
+	
+
+	
+		for (UINT row = 0; row < ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col < ChromaSDK::Keyboard::MAX_COLUMN; col++)
+			{
+				Effect.Color[HIBYTE(Keyboard::RZKEY_3)][LOBYTE(Keyboard::RZKEY_3)] = Color;
+			}
+		}
+
+		
+	
 
 	Sleep(1000);
 	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
