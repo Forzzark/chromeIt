@@ -49,7 +49,7 @@ def createBlinkMouseEffect(name, timeOn, timeOf, color):
 def createSpectrumMouseEffect(name, time):
   pass
 
-def createCustomMouseEffect(name, keyAndColor):
+def createCustomMouseEffect(name, zoneAndColor):
   pass
 
 
