@@ -17,7 +17,7 @@ const COLORREF YELLOW = RGB(255, 255, 0);
 const COLORREF PURPLE = RGB(128, 0, 128);
 const COLORREF CYAN = RGB(00, 255, 255);
 const COLORREF ORANGE = RGB(255, 165, 00);
-const COLORREF PINK = RGB(255, 192, 203);
+const COLORREF PINK = RGB(255, 105, 180);
 const COLORREF GREY = RGB(125, 125, 125);
 
 #define ALL_DEVICES         0
@@ -36,20 +36,20 @@ public:
 	BOOL Initialize();
 	BOOL UnInitialize();
 
-	void ShowMouseStaticEffect(COLORREF color);
-	void ShowMouseBlinkEffect(int on, int off, COLORREF color);
+	RZEFFECTID ShowMouseStaticEffect(COLORREF color);
+	RZEFFECTID ShowMouseBlinkEffect(int on, int off, COLORREF colors[], int size);
 	void ShowMouseSpectrumEffect(int time);
-	void ShowMouseCustomEffect(COLORREF color, int zones);
+	void ShowMouseCustomEffect(COLORREF colors[], int zones[], int size);
 
 	void ShowKeyboardWaveEffect(int direction);
 	void ShowKeyboardSpectrumEffect(int time);
-	void ShowKeyboardBreatheEffect(int type, COLORREF color1, COLORREF color2);
-	void ShowKeyboardBlinkEffect(int on, int off, COLORREF color);
+	void ShowKeyboardBreatheEffect(int type, COLORREF colors[]);
+	void ShowKeyboardBlinkEffect(int on, int off, COLORREF colors[], int size);
 	void ShowKeyboardReactEffect(COLORREF color, int duration);
 	void ShowKeyboardStarlightEffect(int atATime);
 	void ShowKeyboardStaticEffect(COLORREF color);
-	void ShowKeyboardCustomEffect(COLORREF color, int keys);
-	
+	void ShowKeyboardCustomEffect(COLORREF colors[], int keys[], int size);
+
 	BOOL IsDeviceConnected(RZDEVICEID DeviceId);
 
 private:
