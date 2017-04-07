@@ -50,6 +50,8 @@ public:
 	void ShowKeyboardStaticEffect(COLORREF color);
 	void ShowKeyboardCustomEffect(COLORREF colors[], int keys[], int size);
 
+	void setEffectOnSDK(RZEFFECTID effect);
+	
 	BOOL IsDeviceConnected(RZDEVICEID DeviceId);
 
 private:
