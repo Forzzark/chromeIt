@@ -40,6 +40,9 @@ def playEffects(effects):
 
 
 
+
+
+
 def createStaticMouseEffect(name, color):
   pass
 
