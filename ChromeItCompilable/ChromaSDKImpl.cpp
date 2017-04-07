@@ -561,7 +561,9 @@ void CChromaSDKImpl::ShowKeyboardStarlightEffect(int atATime) {
 	}
 }
 
-
+void setEffectOnSDK(RZEFFECTID effect) {
+	SetEffect(effect);
+}
 
 BOOL CChromaSDKImpl::IsDeviceConnected(RZDEVICEID DeviceId)
 {
