@@ -561,7 +561,7 @@ void CChromaSDKImpl::ShowKeyboardStarlightEffect(int atATime) {
 	}
 }
 
-void setEffectOnSDK(RZEFFECTID effect) {
+void CChromaSDKImpl::setEffectOnSDK(RZEFFECTID effect) {
 	SetEffect(effect);
 }
 
