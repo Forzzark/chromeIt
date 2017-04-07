@@ -14,12 +14,11 @@ tokens = chromeItLexer.tokens
 
 
 def p_start(p):
-  'start : effect'
-  print(p[1])
-  p[0] = p[1] #+ p[2]
+  'start : effect COLON COLON playSequence'
 
   createEffects(p[1])
-  # playEffects(p[2])
+  playEffects(p[4])
+
 
     
   
@@ -106,7 +105,7 @@ def p_keyboardEffectType(p):
   #5 Wave Arguments order: [direction]
   #6 Breathe Arguments order: [breatheType, [Colors]]
   #7 React Arguments order: [reactType, color]
-  #8 Starlight Arguments order: [NUMBER]
+  #8 Starlight Arguments order: [NUMBER, color]
 
 
   '''keyboardEffectType : STATIC staticArguments
@@ -394,6 +393,7 @@ def p_breatheType(p):
 # Error rule 
 def p_error(p):
     print("Syntax error in input")
+    print(p)
     
     
 #---------------------------------------------#
@@ -402,14 +402,14 @@ def p_error(p):
 
 def createEffects(effectsList):
   for effect in effectsList:
-    print(effect)
     if(effect[1] == 1):
       toCFunctions.TranslatorFunctions.createMouseEffect(effect)
     elif (effect[1] == 2):
       toCFunctions.TranslatorFunctions.createKeyboardEffect(effect)
 
 def playEffects(effects):
-  pass # toCFunctions.TranslatorFunctions.playEffect(effects)
+
+    toCFunctions.TranslatorFunctions.playEffect(effects)
 
 
 

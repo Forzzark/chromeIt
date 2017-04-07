@@ -13,8 +13,8 @@ tokens = [
     # Numbers
     'NUMBER',
 
-    # Left parenthesis/Right parenthesis/COMA
-    'LP', 'RP', 'COMA',
+    # Left parenthesis/Right parenthesis/COMA/SEMICOLON
+    'LP', 'RP', 'COMA', 'COLON',
 
     # Colors
     'RED', 'BLUE', 'GREEN', 'YELLOW', 'BLACK', 'WHITE', 'ORANGE', 'GREY', 'CYAN', 'PURPLE', 'PINK', 'RGB', 'RANDOM',
@@ -69,6 +69,7 @@ t_NUMBER = r'[0-9]+'
 t_LP = r'\('
 t_RP = r'\)'
 t_COMA = r'\,'
+t_COLON = r'\:'
 t_ignore = ' \t\n'
 
 
@@ -979,4 +980,18 @@ def t_error(t):
 #initializes lexer
 
 lexer = lex.lex()
-
+# try:
+#   ChromeItSource = open("test.txt", 'r')
+# except IOError:
+#   print("Error opening file")
+#   exit()
+#
+# fileText = ChromeItSource.read()
+# lexer.input(fileText)
+#
+# # Tokenize
+# while True:
+#     tok = lexer.token()
+#     if not tok:
+#         break      # No more input
+#     print(tok)
