@@ -53,7 +53,7 @@ def createSpectrumMouseEffect(name, time):
     output[str(name)] = "m_ChromaSDKImpl." + "ShowMouseSpectrumEffect(" + str(time) + ");"
 
 def createCustomMouseEffect(name, keyAndColor):
-    pass
+    output[str(name)] = "m_ChromaSDKImpl." + "ShowMouseCustomEffect(" + str(keyAndColor) + ");"
 
 def createStaticKeyboardEffect(name, color):
     output[str(name)] = "m_ChromaSDKImpl." + "ShowKeyboardStaticEffect(" + str("\"" + color + "\"") + ");"
@@ -65,7 +65,7 @@ def createSpectrumKeyboardEffect(name, time):
     output[str(name)] = "m_ChromaSDKImpl." + "ShowKeyboardSpectrumEffect(" + str(time) + ");"
 
 def createCustomKeyboardEffect(name, keyAndColor):
-    pass
+    output[str(name)] = "m_ChromaSDKImpl." + "ShowKeyboardCustomEffect(" + str(keyAndColor) + ");"
 
 def createWaveKeyboardEffect(name, direction):
     output[str(name)] = "m_ChromaSDKImpl." + "ShowKeyboardWaveEffect(" + str(direction) + ");"
