@@ -147,8 +147,9 @@ void CChromaSDKImpl::ShowMouseStaticEffect(COLORREF color) {
 	CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
 
 	SetEffect(Play);
-	
-	
+	DeleteEffect(Play);
+
+
 }
 void CChromaSDKImpl::ShowMouseCustomEffect(COLORREF colors[], int zones[], int size) {
 	RZEFFECTID Play = GUID_NULL;
@@ -157,18 +158,19 @@ void CChromaSDKImpl::ShowMouseCustomEffect(COLORREF colors[], int zones[], int s
 
 	ChromaSDK::Mouse::CUSTOM_EFFECT_TYPE2 Effect = {};
 
-	for (int index = 0; index < size ; index++)
+	for (int index = 0; index < size; index++)
 	{
-		
+
 		Effect.Color[HIBYTE(zones[index])][LOBYTE(zones[index])] = colors[index];
-	
+
 	}
 
 
 	CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
 
 	SetEffect(Play);
-	
+	DeleteEffect(Play);
+
 }
 void CChromaSDKImpl::ShowMouseBlinkEffect(int on, int off, COLORREF colors[], int size) {
 	//on- time it takes to come on; off - time it takes to come off
@@ -178,27 +180,29 @@ void CChromaSDKImpl::ShowMouseBlinkEffect(int on, int off, COLORREF colors[], in
 
 
 	ChromaSDK::Mouse::CUSTOM_EFFECT_TYPE2 Effect = {};
-	
-		for (int index = 0; index < size; index++) {
-			for (UINT row = 0; row < ChromaSDK::Mouse::MAX_ROW; row++)
+
+	for (int index = 0; index < size; index++) {
+		for (UINT row = 0; row < ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col < ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col < ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = colors[index];
-				}
+				Effect.Color[row][col] = colors[index];
 			}
-
-
-
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_NONE, NULL, &Play2);
-			SetEffect(Play);
-			Sleep(off);
-			SetEffect(Play2);
-			Sleep(on);
 		}
-	
-	
+
+
+
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, &Play);
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_NONE, NULL, &Play2);
+		SetEffect(Play);
+		Sleep(off);
+		SetEffect(Play2);
+		Sleep(on);
+		DeleteEffect(Play);
+		DeleteEffect(Play2);
+	}
+
+
 }
 void CChromaSDKImpl::ShowMouseSpectrumEffect(int time) {
 	RZEFFECTID Play = GUID_NULL;
@@ -207,89 +211,89 @@ void CChromaSDKImpl::ShowMouseSpectrumEffect(int time) {
 	int r = 255;
 	int g = 0;
 	int b = 0;
-		for (int i = 0; i <= 255; i++) {
-			g = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+	for (int i = 0; i <= 255; i++) {
+		g = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			r = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		r = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
+		}
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
 
-		}
-		for (int i = 0; i <= 255; i++) {
-			b = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+	}
+	for (int i = 0; i <= 255; i++) {
+		b = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			g = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		g = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
+		}
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
 
-		}
-		for (int i = 0; i <= 255; i++) {
-			r = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+	}
+	for (int i = 0; i <= 255; i++) {
+		r = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			b = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		b = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Mouse::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Mouse::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
-			Sleep(time);
-
 		}
+		CreateMouseEffect(ChromaSDK::Mouse::CHROMA_CUSTOM2, &Effect, NULL);
+		Sleep(time);
 
-	
+	}
+
+
 }
 
 //Keyboard Effects
@@ -307,10 +311,11 @@ void CChromaSDKImpl::ShowKeyboardWaveEffect(int direction) {
 
 	CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_WAVE, &Effect1, &Play);
 
-	
+
 	SetEffect(Play);
-	
-	
+	Sleep(900);
+	DeleteEffect(Play);
+
 
 }
 void CChromaSDKImpl::ShowKeyboardSpectrumEffect(int time) {
@@ -322,89 +327,89 @@ void CChromaSDKImpl::ShowKeyboardSpectrumEffect(int time) {
 	int r = 255;
 	int g = 0;
 	int b = 0;
-		for (int i = 0; i <= 255; i++) {
-			g = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+	for (int i = 0; i <= 255; i++) {
+		g = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			r = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		r = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
+		}
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
 
-		}
-		for (int i = 0; i <= 255; i++) {
-			b = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+	}
+	for (int i = 0; i <= 255; i++) {
+		b = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			g = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		g = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
+		}
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
 
-		}
-		for (int i = 0; i <= 255; i++) {
-			r = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+	}
+	for (int i = 0; i <= 255; i++) {
+		r = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
 		}
-		for (int i = 254; i >= 0; i--) {
-			b = i;
-			Color = RGB(r, g, b);
-			for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
+	}
+	for (int i = 254; i >= 0; i--) {
+		b = i;
+		Color = RGB(r, g, b);
+		for (UINT row = 0; row<ChromaSDK::Keyboard::MAX_ROW; row++)
+		{
+			for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
 			{
-				for (UINT col = 0; col<ChromaSDK::Keyboard::MAX_COLUMN; col++)
-				{
-					Effect.Color[row][col] = Color;
-				}
+				Effect.Color[row][col] = Color;
 			}
-			CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
-			Sleep(time);
-
 		}
+		CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_CUSTOM_KEY, &Effect, NULL);
+		Sleep(time);
 
-	
+	}
+
+
 
 
 
@@ -426,9 +431,11 @@ void CChromaSDKImpl::ShowKeyboardBreatheEffect(int type, COLORREF colors[]) {
 
 
 	CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_BREATHING, &Effect1, &Play);
-	
+
 	SetEffect(Play);
-	
+	Sleep(8000);
+	DeleteEffect(Play);
+
 
 }
 void CChromaSDKImpl::ShowKeyboardBlinkEffect(int on, int off, COLORREF colors[], int size) {
@@ -454,8 +461,10 @@ void CChromaSDKImpl::ShowKeyboardBlinkEffect(int on, int off, COLORREF colors[],
 		Sleep(off);
 		SetEffect(Play2);
 		Sleep(on);
+		DeleteEffect(Play);
+		DeleteEffect(Play2);
 	}
-	
+
 }
 void CChromaSDKImpl::ShowKeyboardReactEffect(COLORREF color, int duration) {
 	RZEFFECTID Play = GUID_NULL;
@@ -471,14 +480,16 @@ void CChromaSDKImpl::ShowKeyboardReactEffect(COLORREF color, int duration) {
 
 
 	CreateKeyboardEffect(ChromaSDK::Keyboard::CHROMA_REACTIVE, &Effect, &Play);
-	
+
 
 	SetEffect(Play);
+	Sleep(1000);
+	DeleteEffect(Play);
 }
 void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color) {
 	Keyboard::CUSTOM_KEY_EFFECT_TYPE Effect = {};
 	RZEFFECTID Play = GUID_NULL;
-	
+
 
 	for (UINT row = 0; row < ChromaSDK::Keyboard::MAX_ROW; row++)
 	{
@@ -491,8 +502,10 @@ void CChromaSDKImpl::ShowKeyboardStaticEffect(COLORREF color) {
 	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect, &Play);
 
 	SetEffect(Play);
-	
-	
+
+	DeleteEffect(Play);
+
+
 }
 void CChromaSDKImpl::ShowKeyboardCustomEffect(COLORREF colors[], int keys[], int size) {
 	Keyboard::CUSTOM_KEY_EFFECT_TYPE Effect = {};
@@ -507,28 +520,27 @@ void CChromaSDKImpl::ShowKeyboardCustomEffect(COLORREF colors[], int keys[], int
 
 
 	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect, &Play);
-	
+
 	SetEffect(Play);
-	
-	
+
+	DeleteEffect(Play);
 }
-void CChromaSDKImpl::ShowKeyboardStarlightEffect(int atATime) {
+void CChromaSDKImpl::ShowKeyboardStarlightEffect(int atATime, COLORREF color) {
 	//atATime - num of LEDS on
 	RZEFFECTID Play = GUID_NULL;
 	ChromaSDK::Keyboard::CUSTOM_KEY_EFFECT_TYPE Effect1 = {};
 	int row;
 	int col;
-	COLORREF color;
 	for (int i = 0; i < atATime; i++) {
 		row = rand() % Keyboard::MAX_ROW;
 		col = rand() % Keyboard::MAX_COLUMN;
-		color = RGB(rand() % 255, rand() % 255, rand() % 255);
 		Effect1.Color[row][col] = color;
 	}
 	CreateKeyboardEffect(Keyboard::CHROMA_CUSTOM_KEY, &Effect1, &Play);
 	Sleep(175);
 	SetEffect(Play);
-	
+	DeleteEffect(Play);
+
 }
 
 BOOL CChromaSDKImpl::IsDeviceConnected(RZDEVICEID DeviceId)

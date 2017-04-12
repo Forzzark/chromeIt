@@ -36,8 +36,8 @@ public:
 	BOOL Initialize();
 	BOOL UnInitialize();
 
-	RZEFFECTID ShowMouseStaticEffect(COLORREF color);
-	RZEFFECTID ShowMouseBlinkEffect(int on, int off, COLORREF colors[], int size);
+	void ShowMouseStaticEffect(COLORREF color);
+	void ShowMouseBlinkEffect(int on, int off, COLORREF colors[], int size);
 	void ShowMouseSpectrumEffect(int time);
 	void ShowMouseCustomEffect(COLORREF colors[], int zones[], int size);
 
@@ -46,12 +46,12 @@ public:
 	void ShowKeyboardBreatheEffect(int type, COLORREF colors[]);
 	void ShowKeyboardBlinkEffect(int on, int off, COLORREF colors[], int size);
 	void ShowKeyboardReactEffect(COLORREF color, int duration);
-	void ShowKeyboardStarlightEffect(int atATime);
+	void ShowKeyboardStarlightEffect(int atATime, COLORREF color);
 	void ShowKeyboardStaticEffect(COLORREF color);
 	void ShowKeyboardCustomEffect(COLORREF colors[], int keys[], int size);
 
-	void setEffectOnSDK(RZEFFECTID effect);
-	
+
+
 	BOOL IsDeviceConnected(RZDEVICEID DeviceId);
 
 private:

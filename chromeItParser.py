@@ -2,7 +2,7 @@
 #              ChromeIT Parser                #
 #---------------------------------------------#
 import ply.yacc as yacc
-import CTranslatorFunctions as toCFunctions
+import CTranslatorFunctions.TranslatorFunctions as toCFunctions
 
 import chromeItLexer
 #Get tokens from lexer
@@ -174,8 +174,12 @@ def p_direction(p):
   p[0] = p[1]
 
 def p_breatheArguments(p):
-  'breatheArguments : breatheType colors'
-  p[0] = [p[1], p[2]]
+  '''breatheArguments : breatheType colors
+                      | breatheType'''
+  if(len(p)==3):
+    p[0] = [p[1], p[2]]
+  else:
+    p[0] = [p[1], []]
   
 def p_reactArguments(p):
   'reactArguments : reactType color'
@@ -188,22 +192,25 @@ def p_starlightArguments(p):
 def p_customMouseArguments(p):
   '''customMouseArguments : zone color 
                           | zone color customMouseArguments'''
-  if(len(p) == 3):
-    p[0] = [[p[1], p[2]]]
+  if (len(p) == 3):
+    p[0] = [[[p[1], p[2]]]]
   else:
     f = [[p[1], p[2]]]
-    f.extend(p[3])
-    p[0] = f
+    z = (p[3])[0]
+    f.extend(z)
+    p[0] = [f]
+
   
 def p_customKeyboardArguments(p):
   '''customKeyboardArguments : key color 
                              | key color customKeyboardArguments'''
   if (len(p) == 3):
-    p[0] = [[p[1], p[2]]]
+    p[0] = [[[p[1], p[2]]]]
   else:
     f = [[p[1], p[2]]]
-    f.extend(p[3])
-    p[0] = f
+    z = (p[3])[0]
+    f.extend(z)
+    p[0] = [f]
 
 def p_zone(p):
   '''zone : TOP
@@ -368,8 +375,7 @@ def p_color(p):
           | CYAN 
           | ORANGE 
           | PINK 
-          | GREY 
-          | RANDOM 
+          | GREY
           | rgbColor'''
   p[0] = p[1]
 
@@ -384,9 +390,8 @@ def p_reactType(p):
   p[0] = p[1]
   
 def p_breatheType(p):
-  '''breatheType : SLOW
-                | MEDIUM 
-                | FAST'''
+  '''breatheType : TWOCOLORS
+                 | RANDOM'''
   p[0] = p[1]
 
 
@@ -403,26 +408,29 @@ def p_error(p):
 def createEffects(effectsList):
   for effect in effectsList:
     if(effect[1] == 1):
-      toCFunctions.TranslatorFunctions.createMouseEffect(effect)
+      toCFunctions.createMouseEffect(effect)
     elif (effect[1] == 2):
-      toCFunctions.TranslatorFunctions.createKeyboardEffect(effect)
+      toCFunctions.createKeyboardEffect(effect)
+
 
 def playEffects(effects):
 
-    toCFunctions.TranslatorFunctions.playEffect(effects)
+    toCFunctions.RazerChromaApplication(effects)
 
 
 
 #---------------------------------------------#
 #             Parser Testing Code             #
 #---------------------------------------------#
-try:
-  ChromeItSource = open("test.txt", 'r')
-except IOError:
-  print("Error opening file")
-  exit()
 
-fileText = ChromeItSource.read()
+def translateCode(p):
+  try:
+    ChromeItSource = open(p, 'r')
+  except IOError:
+    print("Error opening file")
+    exit()
 
-parser = yacc.yacc()
-res = parser.parse(fileText)
+  fileText = ChromeItSource.read()
+
+  parser = yacc.yacc()
+  res = parser.parse(fileText)
