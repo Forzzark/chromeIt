@@ -1,4 +1,4 @@
-import ChromeItCompilable as Compilable
+
 
 #---------------------------------------------#
 #           Python Intermediate Code          #
@@ -104,7 +104,7 @@ def createSpectrumKeyboardEffect(name, time):
 def createCustomKeyboardEffect(name, keysAndColors):
     print(keysAndColors)
     colorsString = "\n\tCOLORREF " + name + "Colors[] =  {"
-    keysString = "\n\tint " + name + "Zones[] =  {"
+    keysString = "\n\tint " + name + "Keys[] =  {"
     for keyAndColor in keysAndColors:
         keysString += "ChromaSDK::Keyboard::" + keyAndColor[0] + ","
         colorsString += str(keyAndColor[1]) + ","
@@ -213,7 +213,7 @@ def RazerChromaApplication(effectsCalls):
     appFile.write("\n\t}")
 
     #Write Main function which activate threads
-    appFile.write("\n\tint main() {" + "\n\t\tCChromaSDKImpl m_ChromaSDKImpl;" + "\n\t\tm_ChromaSDKImpl.Initialize();")
+    appFile.write("\n\tint main() {" + "\n\t\tm_ChromaSDKImpl.Initialize();")
     appFile.write("\n\t\tSleep(2000);")
     appFile.write("\n\t\tthread t1(mouse);")
     appFile.write("\n\t\tthread t2(keyboard);")

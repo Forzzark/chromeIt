@@ -16,19 +16,16 @@ long mouseStart = 0;
 	}
 	void keyboard(){
 			
-	COLORREF e5Colors[] =  {RED,RED}; 
-	
-	int e5Zones[] =  {ChromaSDK::Keyboard::RZKEY_ENTER,ChromaSDK::Keyboard::RZKEY_ESC};
+	COLORREF e5Colors[] =  {RED};
 		while(true){
 		kbStart = clock();
 		while(clock() - kbStart < 1000){
 			
-	m_ChromaSDKImpl.ShowKeyboardCustomEffect(e5Colors,e5Keys,2);
+	m_ChromaSDKImpl.ShowKeyboardBlinkEffect(50,50,e5Colors,1);
 		}
 		}
 	}
 	int main() {
-		CChromaSDKImpl m_ChromaSDKImpl;
 		m_ChromaSDKImpl.Initialize();
 		Sleep(2000);
 		thread t1(mouse);

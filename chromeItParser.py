@@ -2,7 +2,7 @@
 #              ChromeIT Parser                #
 #---------------------------------------------#
 import ply.yacc as yacc
-import CTranslatorFunctions.TranslatorFunctions as toCFunctions
+import TranslatorFunctions as toCFunctions
 
 import chromeItLexer
 #Get tokens from lexer
