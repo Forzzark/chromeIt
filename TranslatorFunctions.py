@@ -102,7 +102,6 @@ def createSpectrumKeyboardEffect(name, time):
     keyboardEffects[str(name)] = "m_ChromaSDKImpl." + "ShowKeyboardSpectrumEffect(" + str(time) + ");"
 
 def createCustomKeyboardEffect(name, keysAndColors):
-    print(keysAndColors)
     colorsString = "\n\tCOLORREF " + name + "Colors[] =  {"
     keysString = "\n\tint " + name + "Keys[] =  {"
     for keyAndColor in keysAndColors:
