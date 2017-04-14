@@ -398,8 +398,8 @@ def p_breatheType(p):
 # Error rule 
 def p_error(p):
     print("Syntax error in input")
-    print(p)
-    
+    raise
+
     
 #---------------------------------------------#
 #           Python Intermediate Code          #
