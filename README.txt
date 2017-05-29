@@ -24,10 +24,12 @@ Version A:
 -Python 2.7 must be installed
 -ChromeIt Code written in 'ChromeItCode.txt'
 -Translated code will be ready in ChromeItCompilable
+-Razer Chroma SDK must be installed
 
 Additional Reqs. and notes for Version B:
 -Project must be located in C: drive
 -Visual C++ Must be Installed
+-Razer Chroma SDK must be installed
 -Path to folder "tools" of visual studio must be in the system's environment variables
 -Output .exe located in ChromeItCompilable folder
 -Again, this version is not guaranteed to work.
