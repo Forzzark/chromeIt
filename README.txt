@@ -28,7 +28,7 @@ Version A:
 
 Additional Reqs. and notes for Version B:
 -Project must be located in C: drive
--Visual Stduio C++ Enterprise or superior version Must be Installed
+-Visual Stduio C++ Enterprise or superior version with MFC support Must be Installed
 -Razer Chroma SDK must be installed
 -Path to folder "tools" of visual studio must be in the system's environment variables
 -Output .exe located in ChromeItCompilable folder
