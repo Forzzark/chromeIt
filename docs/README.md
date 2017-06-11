@@ -47,4 +47,4 @@ Language manuals due next phase but for testing purposes, some example code is f
 
 To provide an idea of the code grammar it is written as follows:
 
-<effectID> <effectDevice> <EffectType> <EffectArguments> :: <EffectID> <EffectDuration>
+`<effectID> <effectDevice> <EffectType> <EffectArguments> :: <EffectID> <EffectDuration>`
