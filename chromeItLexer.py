@@ -65,7 +65,7 @@ tokens = [
 
 #Regular expression for some tokens
 
-t_ID = r'[a-z]([A-Z]|[0-9])+'
+t_ID = r'[a-z]([a-z]|[A-Z]|[0-9])+'
 t_NUMBER = r'[0-9]+'
 t_LP = r'\('
 t_RP = r'\)'
