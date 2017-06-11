@@ -8,10 +8,9 @@ Jaime Cortes
 
 II. ChromeIt Notes:
 2 Applications included:
-    A) ChromeItApplication.py - This one is used for the Phase 2 of the Programming Languages Course Project.
+A) ChromeItApplication.py - This one is used for the Phase 2 of the Programming Languages Course Project.
                                  This version of ChromeIt includes the translator for ChromeIt Code (lexer, parser and intermediate code); it generates a folder with the C++ files ready for compilation.
-
-    B) ChromeItApplicationWithCComplier.py - This version of ChromeIt Includes everything in version A but additionally attempts to compile the code and create an executable with the Razer Chroma Application
+B) ChromeItApplicationWithCComplier.py - This version of ChromeIt Includes everything in version A but additionally attempts to compile the code and create an executable with the Razer Chroma Application
                                 NOTE: SINCE THIS IS NOT PART OF THE REQUIREMENTS FOR THE PROJECT, THE VERSION HAS NOT BEEN TESTED TO WORK ON ALL WINDOWS SYSTEMS.
                                       MAINLY USED FOR TESTING IN MANUALLY CONFIGURED SYSTEMS.
                                       IT HAS MANY CONSTRAINTS AND ADDITIONAL REQUIREMENTS. IT'S A WORK IN PROGRESS.
