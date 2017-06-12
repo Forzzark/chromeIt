@@ -28,6 +28,7 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 3. After all data has been obtained from the code, it is sent to the Python intermediate code which categorizes and translates it into C/C++ source code.
 4. The C/C++ code creates the effects and playlists making use of the C/C++ intermediate code and Razer's ChromaSDK.
 5. After this code is ready, it is ready to be compiled using a C/C++ compiler with MFC support (Visual C++ recommended)
+6. The generated ChromeIt Application can be executed to play the effects on Chroma Enabled devices
 
 
 # Learning ChromeIt!
