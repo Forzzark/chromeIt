@@ -18,6 +18,7 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 
 
 ## Approach
+
 ![Approach Diagram](https://github.com/Forzzark/chromeIt/blob/master/docs/Untitled%20Diagram.jpg)
 
 ##### The ChromeIt! Architecture works the following way:
@@ -37,6 +38,16 @@ Following is a video tutorial on how to install and use the ChromeIt! translator
 
 ## Language tutorial
 
+Click [here](https://github.com/Forzzark/chromeIt/wiki/Language-Tutorial) to go to the Language Tutorial.
+
 ## Reference Manual
 
+Click [here](https://github.com/Forzzark/chromeIt/wiki/Reference-Manual) to go to the Reference Manual.
+
+
+# Contributors
+
+* Fernando J. Ortiz Sacarello
+* Luis R. Pérez Pagán
+* Jaime A. Cortés Cortés
 
