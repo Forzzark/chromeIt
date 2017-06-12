@@ -19,8 +19,7 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 
 ## Approach
 
-[![Approach Diagram](https://www.flickr.com/photos/83798954@N06/35139183911/in/dateposted-public/)]()
-
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/83798954@N06/35139183911/in/dateposted-public/" title="Approach"><img src="https://c1.staticflickr.com/5/4265/35139183911_25b8c55d3c_b.jpg" width="881" height="361" alt="Approach"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 ##### The ChromeIt! Architecture works the following way:
 
 1. First the User writes code in the ChromeIt Language.
