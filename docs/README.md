@@ -47,7 +47,7 @@ Click [here](https://github.com/Forzzark/chromeIt/wiki/Reference-Manual) to go t
 
 # Contributors
 
-* Fernando J. Ortiz Sacarello
-* Luis R. Pérez Pagán
-* Jaime A. Cortés Cortés
+* [Fernando J. Ortiz Sacarello](https://github.com/Forzzark)
+* [Luis R. Pérez Pagán](https://github.com/luisroperez)
+* [Jaime A. Cortés Cortés](https://github.com/jcdfusion)
 
