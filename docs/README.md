@@ -20,6 +20,14 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 ## Approach
 ![Approach Diagram](https://github.com/Forzzark/chromeIt/blob/master/docs/Untitled%20Diagram.jpg)
 
+##### The ChromeIt! Architecture works the following way:
+
+1. First the User writes code in the ChromeIt Language.
+2. Following, when the user runs the ChromeIt translator, PLY tokenizes the code and parses it.
+3. After all data has been obtained from the code, it is categorized and translated into C/C++.
+4. The C/C++ code creates the effects and playlists making use of the Razer's ChromaSDK.
+5. After this code is ready, it is then compiled.
+6. Now your ChromeIt! Application is ready to play the effects on your Chroma enabled devices.
 
 # Learning ChromeIt!
 
