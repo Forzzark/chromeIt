@@ -22,12 +22,13 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 <a data-flickr-embed="true"  href="https://www.flickr.com/photos/83798954@N06/35139183911/in/dateposted-public/" title="Approach"><img src="https://c1.staticflickr.com/5/4265/35139183911_25b8c55d3c_b.jpg" width="881" height="361" alt="Approach"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 ##### The ChromeIt! Architecture works the following way:
 
+
 1. First the User writes code in the ChromeIt Language.
-2. Following, when the user runs the ChromeIt translator, PLY tokenizes the code and parses it.
-3. After all data has been obtained from the code, it is categorized and translated into C/C++.
-4. The C/C++ code creates the effects and playlists making use of the Razer's ChromaSDK.
-5. After this code is ready, it is then compiled.
-6. Now your ChromeIt! Application is ready to play the effects on your Chroma enabled devices.
+2. Following, when the user runs the ChromeIt translator which reads the ChromeIt Code and is sent to the PLY Lexer whcih tokenizes the code and then to the PLY parser which parses it.
+3. After all data has been obtained from the code, it is sent to the Python intermediate code which categorizes and translates it into C/C++ source code.
+4. The C/C++ code creates the effects and playlists making use of the C/C++ intermediate code and Razer's ChromaSDK.
+5. After this code is ready, it is then compiled with a C/C++ with MFC support.
+6. The compiler generates a ChromeIt! Application which is plays the effects on your Chroma enabled devices.
 
 # Learning ChromeIt!
 
