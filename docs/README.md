@@ -19,7 +19,7 @@ The purpose of the ChromeIt language is to bring simplicity to its users in orde
 
 ## Approach
 
-[![Approach Diagram](https://github.com/Forzzark/chromeIt/blob/master/Approach.png)]()
+[![Approach Diagram](https://www.flickr.com/photos/83798954@N06/35139183911/in/dateposted-public/)]()
 
 ##### The ChromeIt! Architecture works the following way:
 
