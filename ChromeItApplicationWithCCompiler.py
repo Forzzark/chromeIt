@@ -15,10 +15,11 @@ file = "ChromeItCode.txt"
 
 try:
     parser.translateCode(file)
+    print "NONE\n----------------------------------------------------------------------------------\n\n\nNo errors during translation. \'ChromeItCompilable\' folder is ready for compilation."
+
 except:
     print "----------------------------------------------------------------------------------\nAn Error Occured while translating code. Check Error messages above or contact the developers."
-else:
-    print "NONE\n----------------------------------------------------------------------------------\n\n\nNo errors during translation. \'ChromeItCompilable\' folder is ready for compilation."
+
 
 
 print "Attempting to compile ChromeIt App...\n"
@@ -37,12 +38,11 @@ try:
         p.stdin.write(cmd + "\n")
     p.stdin.close()
     log.write(p.stdout.read())
+    print "NONE\n----------------------------------------------------------------------------------\n\n\nNo errors during compilation process. \n\nRazerChromaApplication is ready for execution. You can find it in the ChromeItCompilable folder. \n\nThanks for using ChromeIt!\n\n\n"
 
 except:
     print "Please contact the developers for assistance. Include the log.txt file.\n----------------------------------------------------------------------------------\nAn Error Occured while compiling code. \nPlease contact the developers for assistance."
 
-else:
-    print "NONE\n----------------------------------------------------------------------------------\n\n\nNo errors during compilation process. \n\nRazerChromaApplication is ready for execution. You can find it in the ChromeItCompilable folder. \n\nThanks for using ChromeIt!\n\n\n"
 
 
 
